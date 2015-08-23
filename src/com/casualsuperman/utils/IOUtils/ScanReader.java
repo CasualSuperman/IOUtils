@@ -27,6 +27,7 @@ public class ScanReader {
     public void close() throws IOException {
         wrapped.close();
         wrapped = null;
+        buf = null;
     }
 
     public void skip(int n) throws IOException {
