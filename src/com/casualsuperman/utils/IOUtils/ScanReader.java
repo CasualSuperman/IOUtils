@@ -51,10 +51,14 @@ public class ScanReader {
     }
 
     public String collectUntil(String needle) throws IOException {
-        return collectUntil(needle, false);
+        return collect(needle, false);
     }
 
-    public String collectUntil(String needle, boolean inclusive) throws IOException {
+    public String collectPast(String needle) throws IOException {
+        return collect(needle, true);
+    }
+
+    private String collect(String needle, boolean inclusive) throws IOException {
         collector = new StringBuilder();
         boolean found = scanUntil(needle);
 

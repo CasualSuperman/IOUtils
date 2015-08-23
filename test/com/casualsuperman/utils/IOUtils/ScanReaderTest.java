@@ -26,7 +26,7 @@ public class ScanReaderTest {
                 new ScanReader(new StringReader("12345")).collectUntil("5"));
         assertEquals("Collecting works",
                 "12345",
-                new ScanReader(new StringReader("12345")).collectUntil("5", true));
+                new ScanReader(new StringReader("12345")).collectPast("5"));
     }
 
     @Test
@@ -64,9 +64,9 @@ public class ScanReaderTest {
     public void scanStopsAtFirstMatch() throws IOException {
         ScanReader reader = new ScanReader(new StringReader("1234567891234567891234567891234567890"), 1);
         reader.scanUntil("2");
-        assertEquals("2345", reader.collectUntil("5", true));
+        assertEquals("2345", reader.collectPast("5"));
         reader.scanPast("5");
-        assertEquals("67891234567891234567890", reader.collectUntil("0", true));
+        assertEquals("67891234567891234567890", reader.collectPast("0"));
     }
 
     @Test(expected=IOException.class)
@@ -84,8 +84,8 @@ public class ScanReaderTest {
 
     @Test
     public void notEnoughDataWorks() throws IOException {
-        assertEquals(null, new ScanReader(new StringReader("1234")).collectUntil("5"));
-        assertEquals(null, new ScanReader(new StringReader("1234")).collectUntil("12345"));
+        assertEquals(null, new ScanReader(new StringReader("1234")).collectPast("5"));
+        assertEquals(null, new ScanReader(new StringReader("1234")).collectPast("12345"));
     }
 
     @Test
